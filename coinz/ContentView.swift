@@ -8,9 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var inputAmount = ""
+    @State private var inputUnit = 0
+    let units = ["USD", "XAU", "XAG"]
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            Form {
+                Section(header: Text("What do you want to convert?")) {
+                    TextField("Enter Amount", text: $inputAmount)
+                        .keyboardType(.decimalPad)
+
+                    Picker("Select Unit", selection: $inputUnit) {
+                        ForEach(0 ..< units.count) {
+                            Text(self.units[$0])
+                        }
+                    }.pickerStyle(.segmented)
+                }
+            }.navigationTitle("Coinz")
+        }
     }
 }
 
